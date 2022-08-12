@@ -1,0 +1,62 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/jquery-3.2.1.slim.min.js}"></script>
+    <script th:src="@{/static/js/popper.min.js}"></script>
+    <script th:src="@{/static/js/main.js}"></script>
+</head>
+<body>
+<header th:fragment="header">
+    <div class="container w-1280px pr-40px pl-40px mr-auto ml-auto">
+        <div class="site-header d-flex w-100 align-items-center m-0 justify-content-between h-52px center">
+            <div class="logo" style="border-right: 2px solid #f7f7f7; margin-right: 10px;padding: 5px">
+                <a href="/" title="Home"><img src="/static/img/logo-og-fb.png" alt="Ticket-online" width="160"
+                                              height="50"></a>
+            </div>
+            <div>
+                <form class="form" method="get">
+                    <input style="width: 600px" class="form-control mr-sm-2" type="search" th:placeholder="#{search}"
+                           name="search"
+                           aria-label="Search">
+                </form>
+            </div>
+            <div style="border-right: 2px solid #f7f7f7; padding: 7px 14px;align-items: center">
+                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="cart">
+                    <circle cx="7.3" cy="17.3" r="1.4"></circle>
+                    <circle cx="13.3" cy="17.3" r="1.4">
+                    </circle>
+                    <polyline fill="none" stroke="#000" points="0 2 3.2 4 5.3 12.5 16 12.5 18 6.5 8 6.5"></polyline>
+                </svg>
+                <a href="/basket" title="Basket"
+                   style="text-decoration: none;padding-right: 10px;" th:text="#{basket}"></a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a href="/auth/login" class="btn btn-outline-success" th:text="#{login.button}"></a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a href="/auth/register" class="btn btn-outline-primary" th:text="#{register.button}"></a>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a href="/admin" class="btn btn-outline-primary" th:text="#{fragment.admin.page}"></a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a href="/auth/logout" class="btn btn-outline-danger" th:text="#{fragment.logout}"></a>
+            </div>
+        </div>
+    </div>
+</header>
+<section th:fragment="navbar">
+
+</section>
+</body>
+</html>

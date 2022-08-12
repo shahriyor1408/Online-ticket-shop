@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="fragments.html :: head('Add to cart')"></head>
+<body>
+<header th:include="fragments.html :: header" class="bg-light"></header>
+<hr/>
+<div>
+    <div class="container mt-3 d-flex">
+        <div class="card">
+            <img class="card-img-top"
+                 th:src="@{'/showCover?img=' + ${ticket.cover.path}}"
+                 width="140" height="250"
+                 alt="Card image cap">
+            <div class="card-body">
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.title}"></b><i
+                        th:text="${ticket.title}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.description}"></b><i
+                        th:text="${ticket.description}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.genre}"></b><i
+                        th:text="${ticket.genre.key}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.date}"></b><i
+                        th:text="${ticket.date}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.count}"></b><i th:text="${ticket.count}"></i></i>
+                <i style="display:block;font-size: small;color: #666;"><i
+                        th:text="#{index.card.price}"></i><i th:text="${ticket.price}"></i></i>
+            </div>
+        </div>
+        <div class="mt-2 ml-lg-5">
+            <h2 th:text="#{add.to.card}"></h2>
+            <form method="post" class="form">
+                <div class="form-group">
+                    <label for="quantity"></label>
+                    <input id="quantity" type="number" class="form-control"
+                           th:placeholder="#{quantity}" name="quantity">
+                </div>
+                <button type="submit" class="btn btn-success" th:text="#{accept}"></button>
+                <a href="/" class="btn btn-danger" th:text="#{cancel}"></a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

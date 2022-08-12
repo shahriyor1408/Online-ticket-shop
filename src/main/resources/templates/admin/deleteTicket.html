@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include=" fragments.html :: head('Admin Page')">
+<body>
+<div>
+    <div class="container mt-3">
+        <div class="card">
+            <img class="card-img-top"
+                 th:src="@{'/showCover?img=' + ${ticket.cover.path}}"
+                 width="140" height="250"
+                 alt="Card image cap">
+            <div class="card-body">
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.title}"></b><i
+                        th:text="${ticket.title}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.description}"></b><i
+                        th:text="${ticket.description}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.genre}"></b><i
+                        th:text="${ticket.genre.key}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.date}"></b><i
+                        th:text="${ticket.date}"></i></i>
+                <i style="display:block;font-size: small;color: #000;"><b
+                        th:text="#{index.card.count}"></b><i th:text="${ticket.count}"></i></i>
+                <i style="display:block;font-size: small;color: #666;"><i
+                        th:text="#{index.card.price}"></i><i th:text="${ticket.price}"></i></i>
+            </div>
+        </div>
+        <div class="mt-2">
+            <h2 th:text="#{sure.delete}"></h2>
+            <form method="post">
+                <button type="submit" class="btn btn-success" th:text="#{logout.yes}"></button>
+                <a th:href="@{/admin/tickets}" class="btn btn-danger" th:text="#{logout.back}"></a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

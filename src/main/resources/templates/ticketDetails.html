@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="fragments.html :: head('Admin Page')"></head>
+<body>
+<header th:include="fragments.html :: header" class="bg-light"></header>
+<hr/>
+<div>
+    <div class="ml-lg-2 mr-lg-2 d-flex">
+        <div style="border-right: 2px solid #f7f7f7;width: 15%;height: 100%; text-align: center">
+            <ul>
+                <li>
+                    <a href="/admin" style="text-decoration: none">Customers</a>
+                </li>
+                <li>
+                    <a href="/admin/tickets" style="text-decoration: none">Tickets</a>
+                </li>
+                <li>
+                    <a href="/admin/orderHistory" style="text-decoration: none">Orders History</a>
+                </li>
+                <li>
+                    <a href="/admin/addTicket" style="text-decoration: none">Add Ticket</a>
+                </li>
+                <li>
+                    <a href="/" style="text-decoration: none">Home</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row" style="width: 85%;height: 100%;margin-left: 15px">
+            <div class="card">
+                <img class="card-img-top"
+                     th:src="@{'/showCover?img=' + ${ticket.cover.path}}"
+                     width="140" height="250"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <i style="display:block;font-size: small;color: #000;"><b
+                            th:text="#{index.card.title}"></b><i
+                            th:text="${ticket.title}"></i></i>
+                    <i style="display:block;font-size: small;color: #000;"><b
+                            th:text="#{index.card.description}"></b><i
+                            th:text="${ticket.description}"></i></i>
+                    <i style="display:block;font-size: small;color: #000;"><b
+                            th:text="#{index.card.genre}"></b><i
+                            th:text="${ticket.genre.key}"></i></i>
+                    <i style="display:block;font-size: small;color: #000;"><b
+                            th:text="#{index.card.date}"></b><i
+                            th:text="${ticket.date}"></i></i>
+                    <i style="display:block;font-size: small;color: #000;"><b
+                            th:text="#{index.card.count}"></b><i th:text="${ticket.count}"></i></i>
+                    <i style="display:block;font-size: small;color: #666;"><i
+                            th:text="#{index.card.price}"></i><i th:text="${ticket.price}"></i></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include=" fragments.html :: head('Admin Page')">
+<body>
+<header th:include="fragments.html :: header" class="bg-light"></header>
+<hr/>
+<div>
+    <div class="ml-lg-2 mr-lg-2 d-flex">
+        <div style="border-right: 2px solid #f7f7f7;width: 15%;height: 100%; text-align: center">
+            <ul>
+                <li>
+                    <a href="/admin" style="text-decoration: none" th:text="#{admin.ul.customers}"></a>
+                </li>
+                <li>
+                    <a href="/admin/tickets" style="text-decoration: none" th:text="#{admin.ul.tickets}"></a>
+                </li>
+                <li>
+                    <a href="/admin/orderHistory" style="text-decoration: none"
+                       th:text="#{admin.ul.orders.history}"></a>
+                </li>
+                <li>
+                    <a href="/admin/addTicket" style="text-decoration: none"
+                       th:text="#{admin.ul.orders.add.ticket}"></a>
+                </li>
+                <li>
+                    <a href="/" style="text-decoration: none" th:text="#{admin.ul.orders.home}"></a>
+                </li>
+            </ul>
+        </div>
+        <div style="width: 85%;height: 100%">
+            <form class="form w-100" method="post" action="/admin/addTicket"
+                  th:object="${ticketDTO}" enctype="multipart/form-data">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <input type="hidden" name="_csrf" value="${cookie['XSRF-TOKEN'].getValue()}"/>
+                        <div class="form-group mb-3">
+                            <label for="title" th:text="#{table.head.title}"></label>
+                            <input type="text" class="form-control" th:field="${ticketDTO.title}" id="title"
+                                   name="title"
+                                   th:placeholder="#{add.ticket.description.place}">
+                            <div style="color: red;font-size: small;" th:if="${#fields.hasErrors('title')}"
+                                 th:errors="${ticketDTO.title}">
+                                Title error
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description" th:text="#{add.ticket.description}"></label>
+                            <input type="text" class="form-control" th:field="${ticketDTO.description}"
+                                   name="description" th:placeholder="#{add.ticket.description}"
+                                   id="description"/>
+                            <div style="color: red;font-size: small;"
+                                 th:if="${#fields.hasErrors('description')}"
+                                 th:errors="${ticketDTO.description}">
+                                Description error
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="date" th:text="#{add.ticket.date}"></label>
+                            <input type="datetime-local" class="form-control" th:field="${ticketDTO.date}"
+                                   name="date"
+                                   id="date"/>
+                            <div style="color: red;font-size: small;"
+                                 th:if="${#fields.hasErrors('date')}"
+                                 th:errors="${ticketDTO.date}">
+                                Date error
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="count" th:text="#{add.ticket.count}"></label>
+                            <input type="number" class="form-control" th:field="${ticketDTO.count}"
+                                   th:placeholder="#{add.ticket.count.place}"
+                                   name="count"
+                                   id="count"/>
+                            <div style="color: red;font-size: small;"
+                                 th:if="${#fields.hasErrors('count')}"
+                                 th:errors="${ticketDTO.count}">
+                                Count error
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group mb-3">
+                            <label for="genre" th:text="#{table.head.genre}"></label>
+                            <select class="form-control" name="genre" id="genre">
+                                <th:block th:each="genre : ${genres}">
+                                    <option th:value="${genre.name()}" th:text="${genre.key}"
+                                            th:field="${ticketDTO.genre}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price" th:text="#{table.head.price}"></label>
+                            <input type="number" class="form-control" th:name="#{table.head.price}"
+                                   th:field="${ticketDTO.price}"
+                                   id="price" th:placeholder="#{table.head.price}"/>
+                            <div style="color: red;font-size: small;" th:if="${#fields.hasErrors('price')}"
+                                 th:errors="${ticketDTO.price}">
+                                Price error
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="file" th:text="#{add.ticket.file}"></label>
+                            <input type="file" class="form-control" name="file"
+                                   id="file" th:placeholder="#{add.ticket.file}"/>
+                        </div>
+                        <div style="margin-top: 43px;margin-left: 355px">
+                            <button type="submit" class="btn btn-success" th:text="#{add.ticket.save}"></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="fragments.html :: head('Admin Page')">
+</head>
+<body>
+<header th:include="fragments.html :: header" class="bg-light"></header>
+<hr/>
+<div>
+    <div class="ml-lg-2 mr-lg-2 d-flex">
+        <div style="border-right: 2px solid #f7f7f7;width: 15%;height: 100%; text-align: center">
+            <ul>
+                <li>
+                    <a href="/admin" style="text-decoration: none" th:text="#{admin.ul.customers}"></a>
+                </li>
+                <li>
+                    <a href="/admin/tickets" style="text-decoration: none" th:text="#{admin.ul.tickets}"></a>
+                </li>
+                <li>
+                    <a href="/admin/orderHistory" style="text-decoration: none"
+                       th:text="#{admin.ul.orders.history}"></a>
+                </li>
+                <li>
+                    <a href="/admin/addTicket" style="text-decoration: none"
+                       th:text="#{admin.ul.orders.add.ticket}"></a>
+                </li>
+                <li>
+                    <a href="/" style="text-decoration: none" th:text="#{admin.ul.orders.home}"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="row" style="width: 85%;height: 100%">
+            <th:block th:each="customer : ${page.content}">
+                <div class="col-3">
+                    <div class="card p-2">
+                        <img class="card-img-top" src="/showCover?img=/uploads/account-logo.jpg" width="140"
+                             height="250"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <i style="display:block;font-size: small"><b th:text="#{admin.card.email}"></b><i
+                                    th:text="${customer.email}"></i></i>
+                            <i style="display:block;font-size: small"><b th:text="#{admin.card.phone}"></b><i
+                                    th:text="${customer.phone}"></i></i>
+                            <i style="display:block;font-size: small"><b th:text="#{admin.card.active}"></b><i
+                                    th:text="${customer.active}"></i></i>
+                            <i style="display:block;font-size: small"><b th:text="#{admin.card.roles}"></b><i
+                                    th:text="${customer.roles}"></i></i>
+                            <div>
+                                <a style="text-decoration: none" href="/admin/give/adminRole"
+                                   th:text="#{admin.card.give.admin.role}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" style="margin-top: 12px;margin-left: 210px">
+        <ul class="pagination">
+            <th:block th:if="${page.hasPrevious()}">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'?page='+${page.previousPageable().pageNumber+1}}"
+                       tabindex="-1" th:text="#{pagination.previous}"></a>
+                </li>
+            </th:block>
+
+            <th:block th:each="pageNumber : ${number}">
+                <li th:class="page-item" th:classappend="${page.number+1 == pageNumber} ? active : ''">
+                    <a class="page-link" th:href="@{'?page=' + ${pageNumber}}"
+                       th:text="${pageNumber}"></a>
+                </li>
+            </th:block>
+            <th:block th:if="${page.hasNext()}">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'?page=' + ${page.nextPageable().pageNumber+1}}"
+                       tabindex="-1" th:text="#{pagination.next}"></a>
+                </li>
+            </th:block>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

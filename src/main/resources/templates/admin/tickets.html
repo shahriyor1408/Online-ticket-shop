@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="fragments.html :: head('Admin Page')"></head>
+<body>
+<header th:include="fragments.html :: header" class="bg-light"></header>
+<hr/>
+<div>
+    <div class="ml-lg-2 mr-lg-2 d-flex">
+        <div style="border-right: 2px solid #f7f7f7;width: 15%;height: 100%; text-align: center">
+            <ul>
+                <li>
+                    <a href="/admin" style="text-decoration: none">Customers</a>
+                </li>
+                <li>
+                    <a href="/admin/tickets" style="text-decoration: none">Tickets</a>
+                </li>
+                <li>
+                    <a href="/admin/orderHistory" style="text-decoration: none">Orders History</a>
+                </li>
+                <li>
+                    <a href="/admin/addTicket" style="text-decoration: none">Add Ticket</a>
+                </li>
+                <li>
+                    <a href="/" style="text-decoration: none">Home</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row" style="width: 85%;height: 100%">
+            <th:block th:each="ticket : ${page.content}">
+                <div class="col-3">
+                    <div class="card p-2">
+                        <img class="card-img-top"
+                             th:src="@{'/showCover?img=' + ${ticket.cover.path}}"
+                             width="140" height="250"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <i style="display:block;font-size: small;color: #000;"><b>Title : </b><i
+                                    th:text="${ticket.title}"></i></i>
+                            <i style="display:block;font-size: small;color: #000;"><b>Description : </b><i
+                                    th:text="${ticket.description}"></i></i>
+                            <i style="display:block;font-size: small;color: #000;"><b>Genre : </b><i
+                                    th:text="${ticket.genre.key}"></i></i>
+                            <i style="display:block;font-size: small;color: #000;"><b>Date : </b><i
+                                    th:text="${ticket.date}"></i></i>
+                            <i style="display:block;font-size: small;color: #000;"><b>Count : </b><i
+                                    th:text="${ticket.count}"></i></i>
+                            <i style="display:block;font-size: small;color: #666;">Price : <i
+                                    th:text="${ticket.price}"></i></i>
+                            <a class="btn btn-info" th:href="@{'/admin/updateTicket/' + ${ticket.id}}">Update</a>
+                            <a class="btn btn-danger" th:href="@{'/admin/deleteTicket/' + ${ticket.id}}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" style="margin-top: 12px;margin-left: 210px">
+        <ul class="pagination">
+            <th:block th:if="${page.hasPrevious()}">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{'?page='+${page.previousPageable().pageNumber+1}}"
+                       tabindex="-1">Previous</a>
+                </li>
+            </th:block>
+
+            <th:block th:each="pageNumber : ${pageNumbers}">
+                <li th:class="page-item" th:classappend="${page.number+1 == pageNumber} ? active : ''">
+                    <a class="page-link" th:href="@{'?page=' + ${pageNumber}}" th:text="${pageNumber}"></a>
+                </li>
+            </th:block>
+            <th:block th:if="${page.hasNext()}">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{'?page='+${page.nextPageable().pageNumber+1}}"
+                       tabindex="-1">Next</a>
+                </li>
+            </th:block>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

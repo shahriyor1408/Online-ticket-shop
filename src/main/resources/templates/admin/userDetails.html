@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="fragments.html :: head('Admin Page')">
+</head>
+<body>
+<header th:include="fragments.html :: header" class="bg-light"></header>
+<hr/>
+<div>
+    <div class="ml-lg-2 mr-lg-2 d-flex">
+        <div style="border-right: 2px solid #f7f7f7;width: 15%;height: 100%; text-align: center">
+            <ul>
+                <li>
+                    <a href="/admin" style="text-decoration: none">Customers</a>
+                </li>
+                <li>
+                    <a href="/admin/tickets" style="text-decoration: none">Tickets</a>
+                </li>
+                <li>
+                    <a href="/admin/orderHistory" style="text-decoration: none">Orders History</a>
+                </li>
+                <li>
+                    <a href="/admin/addTicket" style="text-decoration: none">Add Ticket</a>
+                </li>
+                <li>
+                    <a href="/" style="text-decoration: none">Home</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row" style="width: 85%;height: 100%">
+            <div class="col-3 ml-lg-5">
+                <div class="card p-2">
+                    <img class="card-img-top" th:src="@{static/img/account-logo.jpg}" width="140" height="250"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <i style="display:block;font-size: small"><b>Email : </b><i th:text="${user.email}"></i></i>
+                        <i style="display:block;font-size: small"><b>Phone : </b><i th:text="${user.phone}"></i></i>
+                        <i style="display:block;font-size: small"><b>Active : </b><i
+                                th:text="${user.active}"></i></i>
+                        <i style="display:block;font-size: small"><b>Roles : </b><i th:text="${user.roles}"></i></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
