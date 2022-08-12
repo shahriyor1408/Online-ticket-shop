@@ -84,20 +84,4 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
-//    @Bean
-//    public CsrfRequestDataValueProcessor csrfRequestDataValueProcessor() {
-//        return new CsrfRequestDataValueProcessor();
-//    }
-//
-//    @Bean
-//    public HttpSessionCsrfTokenRepository httpSessionCsrfTokenRepository() {
-//        return new HttpSessionCsrfTokenRepository();
-//    }
-//
-//    @Bean
-//    public CsrfFilter csrfFilter(HttpSessionCsrfTokenRepository csrfTokenRepository) {
-//        CsrfFilter csrfFilter = new CsrfFilter(csrfTokenRepository);
-//        return csrfFilter;
-//    }
 }
